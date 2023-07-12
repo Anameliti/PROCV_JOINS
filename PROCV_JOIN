@@ -1,0 +1,36 @@
+#Utilizando a biblioteca Pandas para realizar o PROCV(Excel) e Joins(SQL)
+
+Import pandas as pd
+
+#carregando os datasets e visualizando para ver se os dados estão corretos
+
+df_id = pd.read_csv(r'C:\Users\Ana Carolina Meliti\OneDrive\Documents\ID.csv')
+df_id.head(4) #limitando a visualização em apenas 4 como amostragem
+
+df_cpf = pd.read_csv(r'C:\Users\Ana Carolina Meliti\OneDrive\Documents\CPF.csv')
+df_cpf.head(4)
+
+#Aplicando a função MERGE que faz essa união de tabelas como se utilizassemos as Joins(SQL)
+#Se fosse na PROCV = PROCV(df_id, df_cpf, 1,0)
+
+pd.merge(df_id, df_cpf, on='ID', how='left').head()
+
+#salvando o novo dataset em csv para utilizar em uma nova mesclagem
+
+df_unified = pd.merge(df_id, df_cpf, on='ID', how='left')
+df_unified.to_csv('unified_cad.csv')
+
+#carregando os dois datasets para finalizar a unificação dos dados
+
+df_unified = pd.read_csv(r'C:\Users\Ana Carolina Meliti\Downloads\unified_cad.csv')
+df_unified.head()
+
+#Finalizado a unificação ds tabelas e salvando em csv
+
+finaly_unified = pd.merge(df_unified,df_uf, on='ID', how='left')
+finaly_unified.to_csv('finaly_unified.csv')
+
+#visualizando o dataset para ver se está tudo corretamente
+
+df_finaly = pd.read_csv(r'C:\Users\Ana Carolina Meliti\Downloads\finaly_unified.csv')
+df_finaly.head()
