@@ -1,0 +1,24 @@
+#Utilizando Pandas para unificação de tabelas conforme o PROCV e JOINS
+
+Import Pandas as pd
+
+df_id = pd.read_csv(r'C:\Users\Ana Carolina Meliti\Downloads\ID.csv')
+df_id.head() #importando o primeiro dataset
+
+df_uf = pd.read_csv(r'C:\Users\Ana Carolina Meliti\Downloads\UF.csv')
+df_uf.head() #importando o segundo dataset
+
+#Fazendo a junção dos datasets com a MERGE
+
+#Sintaxe PROCV(df_id,df_uf, 2,0) 
+pd.merge(df_id, df_uf, on='Id', how='left') #'on' é a palavra incomum entre os datasets e 'how' é como vamos juntar eles
+
+#Importei a terceira tabela que continha informações importantes
+
+df_cpf = pd.read_csv(r'C:\Users\Ana Carolina Meliti\Downloads\CPF.csv')
+df_cpf
+
+#Realizei a junção do primeiro dataset unificado com o ultimo importado e salvei em CSV
+
+df_finally = pd.merge(df_unified, df_cpf, on='Id', how='right')
+df_finally.to_csv('df_finally.csv')
